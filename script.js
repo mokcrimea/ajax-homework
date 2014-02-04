@@ -19,6 +19,8 @@ function checkLocalStorage(user) {
         } else {
             findUser(user);
         }
+    } else {
+        findUser(user);
     }
 }
 
