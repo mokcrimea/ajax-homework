@@ -15,7 +15,7 @@ document.body.getElementsByTagName('input')[0].addEventListener('keydown', funct
 function checkLocalStorage(user) {
     if (window.localStorage) {
         if (localStorage[user]) {
-            checkDate(JSON.parse(localStorage[user]));
+            checkDate(user);
         } else {
             findUser(user);
         }
@@ -99,7 +99,7 @@ function setLocalStorage(elem) {
         var user_select = [],
             temp = {
                 repos: [],
-                date: new Date()
+                date: new Date().valueOf()
             };
         user_select = ['avatar_url', 'login', 'name', 'email', 'followers'];
         user_select.forEach(function(item) {
@@ -122,10 +122,11 @@ function setLocalStorage(elem) {
  */
 
 function checkDate(user) {
-    if (new Date() - new Date(user.date) > 86400000) {
+    var userInLocalStorage = JSON.parse(localStorage[user]);
+    if (new Date().valueOf() - userInLocalStorage.date > 86400000) {
         findUser(user);
     } else {
-        parseUserInfo(user);
+        parseUserInfo(userInLocalStorage);
     }
 }
 
