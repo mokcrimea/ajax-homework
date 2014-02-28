@@ -57,7 +57,7 @@ function checkLocalStorage(user) {
 
     function findUser(user) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://api.github.com/users/' + user, true);
+        xhr.open('GET', 'https://api.github.com/users/' + user);
 
         xhr.onreadystatechange = function() {
             if (this.readyState != 4) return;
@@ -76,12 +76,12 @@ function checkLocalStorage(user) {
                 findRepos(user);
             }
         };
-        xhr.send(null);
+        xhr.send();
     }
 
     function findRepos(user) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://api.github.com/users/' + user + "/repos", true);
+        xhr.open('GET', 'https://api.github.com/users/' + user + "/repos");
 
         xhr.onreadystatechange = function() {
             if (this.readyState != 4) return;
@@ -90,7 +90,7 @@ function checkLocalStorage(user) {
             setLocalStorage(info);
             parseUserInfo(info);
         };
-        xhr.send(null);
+        xhr.send();
     }
     /**
      * Функция записывает данные о пользователе в localStorage
